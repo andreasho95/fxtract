@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Adds a variable to a dataset by a sliding window approach. — slidingWindow • fxtract</title>
+<title>Adds a variable to a dataset by a sliding window approach. — slidingWindow2 • fxtract</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Adds a variable to a dataset by a sliding window approach. — slidingWindow" />
+<meta property="og:title" content="Adds a variable to a dataset by a sliding window approach. — slidingWindow2" />
 
 <meta property="og:description" content="Adds a variable to a dataset by a sliding window approach." />
 <meta name="twitter:card" content="summary" />
@@ -125,8 +125,8 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Adds a variable to a dataset by a sliding window approach.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/QuayAu/fxtract/blob/master/R/slidingWindow.R'><code>R/slidingWindow.R</code></a></small>
-    <div class="hidden name"><code>slidingWindow.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/QuayAu/fxtract/blob/master/R/slidingWindow2.R'><code>R/slidingWindow2.R</code></a></small>
+    <div class="hidden name"><code>slidingWindow2.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -135,8 +135,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>slidingWindow</span>(<span class='no'>data</span>, <span class='no'>fun</span>, <span class='no'>steps</span>, <span class='no'>time_in_sec</span>, <span class='kw'>colname</span> <span class='kw'>=</span> <span class='st'>"new_feature"</span>,
-  <span class='kw'>check_fun</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>slidingWindow2</span>(<span class='no'>data</span>, <span class='no'>fun</span>, <span class='no'>steps</span>, <span class='no'>time_in_sec</span>, <span class='kw'>check_fun</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,7 +146,7 @@
     </tr>
     <tr>
       <th>fun</th>
-      <td><p>function. Must be a function, which has a dataframe as input and a vector of length 1 as output.</p></td>
+      <td><p>function. A function that has `data`` as input and a dataframe with 1 row as output.</p></td>
     </tr>
     <tr>
       <th>steps</th>
@@ -158,10 +157,6 @@ Use this for data with fixed sample rate.</p></td>
       <th>time_in_sec</th>
       <td><p>integer. Number of seconds which the sliding window should go back.
 Use this for data with variable sample rate.</p></td>
-    </tr>
-    <tr>
-      <th>colname</th>
-      <td><p>character. Column name of the new column.</p></td>
     </tr>
     <tr>
       <th>check_fun</th>
@@ -182,13 +177,14 @@ if the outcome is of correct form. Set to <code>FALSE</code>, if evaluation on t
   <code>addStudyDay</code>, <code>addTime</code>,
   <code>addWeekday</code>, <code>calcStudyDay</code>,
   <code>divideDataIntoIntervals</code>,
-  <code>slidingWindow2</code></p></div>
+  <code>slidingWindow</code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>fun</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>mean</span>(<span class='no'>x</span>$<span class='no'>accuracy</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="examples"><div class='input'><span class='no'>fun</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>x</span>) <span class='fu'>data.frame</span>(<span class='kw'>mean.accuracy.last30</span> <span class='kw'>=</span> <span class='fu'>mean</span>(<span class='no'>x</span>$<span class='no'>accuracy</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+  <span class='kw'>max.accuracy.last30</span> <span class='kw'>=</span> <span class='fu'>max</span>(<span class='no'>x</span>$<span class='no'>accuracy</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
 <span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>addDateTime</span>(<span class='no'>studentlife.small</span>[<span class='fl'>1</span>:<span class='fl'>30</span>, ]) <span class='co'>#needs date_time variable</span>
-<span class='fu'>slidingWindow</span>(<span class='no'>data</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='no'>fun</span>, <span class='kw'>time_in_sec</span> <span class='kw'>=</span> <span class='fl'>60</span> * <span class='fl'>60</span>) <span class='co'>#mean accuracy of last hour</span></div><div class='output co'>#&gt;     timestamp provider network_type accuracy latitude longitude altitude
+<span class='fu'>slidingWindow2</span>(<span class='no'>data</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='no'>fun</span>, <span class='kw'>time_in_sec</span> <span class='kw'>=</span> <span class='fl'>60</span> * <span class='fl'>60</span>) <span class='co'>#mean accuracy of last hour</span></div><div class='output co'>#&gt;     timestamp provider network_type accuracy latitude longitude altitude
 #&gt; 1  1364357009  network         wifi   67.993 43.70667 -72.28910      0.0
 #&gt; 2  1364358209  network         wifi   23.000 43.70664 -72.28907      0.0
 #&gt; 3  1364359405      gps                16.000 43.70668 -72.28902    136.3
@@ -343,37 +339,37 @@ if the outcome is of correct form. Set to <code>FALSE</code>, if evaluation on t
 #&gt; 28                             &lt;NA&gt;                               &lt;NA&gt;
 #&gt; 29                             &lt;NA&gt;                               &lt;NA&gt;
 #&gt; 30                             &lt;NA&gt;                               &lt;NA&gt;
-#&gt;              date_time new_feature
-#&gt; 1  2013-03-27 04:03:29          NA
-#&gt; 2  2013-03-27 04:23:29   67.993000
-#&gt; 3  2013-03-27 04:43:25   45.496500
-#&gt; 4  2013-03-27 05:03:29   19.500000
-#&gt; 5  2013-03-27 05:23:25   36.708667
-#&gt; 6  2013-03-27 05:43:33   43.563000
-#&gt; 7  2013-03-27 06:03:29   14.000000
-#&gt; 8  2013-03-27 06:23:31   39.633500
-#&gt; 9  2013-03-27 06:43:31   28.755667
-#&gt; 10 2013-03-27 07:03:33    6.500000
-#&gt; 11 2013-03-27 07:23:32    8.000000
-#&gt; 12 2013-03-27 07:43:29    9.333333
-#&gt; 13 2013-03-27 08:03:32   30.877667
-#&gt; 14 2013-03-27 08:23:30   30.877667
-#&gt; 15 2013-03-27 08:43:32    9.500000
-#&gt; 16 2013-03-27 09:03:32    9.500000
-#&gt; 17 2013-03-27 09:23:29    9.666667
-#&gt; 18 2013-03-27 09:43:29   30.229333
-#&gt; 19 2013-03-27 10:03:32   68.880500
-#&gt; 20 2013-03-27 10:23:29   42.036500
-#&gt; 21 2013-03-27 10:43:29   92.842000
-#&gt; 22 2013-03-27 11:03:29   90.119333
-#&gt; 23 2013-03-27 11:23:31   76.036000
-#&gt; 24 2013-03-27 11:43:29   42.699000
-#&gt; 25 2013-03-27 12:03:31   19.000000
-#&gt; 26 2013-03-27 12:23:29   18.333333
-#&gt; 27 2013-03-27 12:36:57   39.442667
-#&gt; 28 2013-03-27 13:23:29   15.000000
-#&gt; 29 2013-03-27 13:43:29   21.523000
-#&gt; 30 2013-03-27 14:03:31   21.217000</div></pre>
+#&gt;              date_time mean.accuracy.last30 max.accuracy.last30
+#&gt; 1  2013-03-27 04:03:29                   NA                  NA
+#&gt; 2  2013-03-27 04:23:29            67.993000              67.993
+#&gt; 3  2013-03-27 04:43:25            45.496500              67.993
+#&gt; 4  2013-03-27 05:03:29            19.500000              23.000
+#&gt; 5  2013-03-27 05:23:25            36.708667              71.126
+#&gt; 6  2013-03-27 05:43:33            43.563000              71.126
+#&gt; 7  2013-03-27 06:03:29            14.000000              16.000
+#&gt; 8  2013-03-27 06:23:31            39.633500              67.267
+#&gt; 9  2013-03-27 06:43:31            28.755667              67.267
+#&gt; 10 2013-03-27 07:03:33             6.500000               7.000
+#&gt; 11 2013-03-27 07:23:32             8.000000              10.000
+#&gt; 12 2013-03-27 07:43:29             9.333333              12.000
+#&gt; 13 2013-03-27 08:03:32            30.877667              70.633
+#&gt; 14 2013-03-27 08:23:30            30.877667              70.633
+#&gt; 15 2013-03-27 08:43:32             9.500000              10.000
+#&gt; 16 2013-03-27 09:03:32             9.500000              10.000
+#&gt; 17 2013-03-27 09:23:29             9.666667              10.000
+#&gt; 18 2013-03-27 09:43:29            30.229333              70.688
+#&gt; 19 2013-03-27 10:03:32            68.880500              70.688
+#&gt; 20 2013-03-27 10:23:29            42.036500              67.073
+#&gt; 21 2013-03-27 10:43:29            92.842000             168.684
+#&gt; 22 2013-03-27 11:03:29            90.119333             168.684
+#&gt; 23 2013-03-27 11:23:31            76.036000              84.674
+#&gt; 24 2013-03-27 11:43:29            42.699000              67.398
+#&gt; 25 2013-03-27 12:03:31            19.000000              20.000
+#&gt; 26 2013-03-27 12:23:29            18.333333              20.000
+#&gt; 27 2013-03-27 12:36:57            39.442667              81.328
+#&gt; 28 2013-03-27 13:23:29            15.000000              15.000
+#&gt; 29 2013-03-27 13:43:29            21.523000              21.523
+#&gt; 30 2013-03-27 14:03:31            21.217000              21.523</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
