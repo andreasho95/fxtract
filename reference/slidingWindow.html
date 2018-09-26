@@ -135,7 +135,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>slidingWindow</span>(<span class='no'>data</span>, <span class='no'>fun</span>, <span class='no'>steps</span>, <span class='no'>time_in_sec</span>, <span class='kw'>check_fun</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>slidingWindow</span>(<span class='no'>data</span>, <span class='no'>fun</span>, <span class='no'>steps</span>, <span class='no'>time_in_sec</span>, <span class='kw'>check_fun</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>eval_at_rows</span> <span class='kw'>=</span> <span class='fu'>numeric</span>(<span class='fl'>0</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +163,10 @@ Use this for data with variable sample rate.</p></td>
       <th>check_fun</th>
       <td><p>logical. If <code>TRUE</code>, fun(data) will be evaluated and checked, 
 if the outcome is of correct form. Set to <code>FALSE</code>, if evaluation on the whole dataset takes too long.</p></td>
+    </tr>
+    <tr>
+      <th>eval_at_rows</th>
+      <td><p>integer. Inte</p></td>
     </tr>
     </table>
     
